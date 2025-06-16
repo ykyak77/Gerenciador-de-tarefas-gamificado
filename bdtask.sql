@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Tempo de geração: 14/06/2025 às 01:22
--- Versão do servidor: 10.4.28-MariaDB
--- Versão do PHP: 8.2.4
+-- Host: 127.0.0.1
+-- Tempo de geração: 16/06/2025 às 03:01
+-- Versão do servidor: 10.4.32-MariaDB
+-- Versão do PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -73,8 +73,16 @@ CREATE TABLE `tarefas` (
   `usuario_id` int(11) NOT NULL,
   `descricao` varchar(150) NOT NULL,
   `recompensa` int(11) DEFAULT 20,
+  `dificuldade` enum('FACIL','MEDIO','DIFICIL') NOT NULL,
   `concluido` tinyint(1) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `tarefas`
+--
+
+INSERT INTO `tarefas` (`id_tarefas`, `usuario_id`, `descricao`, `recompensa`, `dificuldade`, `concluido`) VALUES
+(1, 1, 'Arrumar a cama', 25, 'FACIL', 1);
 
 -- --------------------------------------------------------
 
@@ -90,6 +98,14 @@ CREATE TABLE `usuarios` (
   `senha` varchar(150) NOT NULL,
   `moedas` int(11) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `usuarios`
+--
+
+INSERT INTO `usuarios` (`id_usuario`, `nome`, `username`, `email`, `senha`, `moedas`) VALUES
+(1, 'Maria', 'Mah', 'mariazinha009@gmail.com', '1234', 0),
+(2, 'Josias', 'jojo', 'josias1233@gmail.com', '1234', 0);
 
 --
 -- Índices para tabelas despejadas
@@ -157,13 +173,13 @@ ALTER TABLE `personagens`
 -- AUTO_INCREMENT de tabela `tarefas`
 --
 ALTER TABLE `tarefas`
-  MODIFY `id_tarefas` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_tarefas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de tabela `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Restrições para tabelas despejadas

@@ -19,7 +19,7 @@ import javax.persistence.Table;
 
 /**
  *
- * @author ifsp
+ * @author Kayky Henrique
  */
 @Entity
 @Table(name = "tarefas")
@@ -28,6 +28,7 @@ import javax.persistence.Table;
     @NamedQuery(name = "Tarefas.findByIdTarefas", query = "SELECT t FROM Tarefas t WHERE t.idTarefas = :idTarefas"),
     @NamedQuery(name = "Tarefas.findByDescricao", query = "SELECT t FROM Tarefas t WHERE t.descricao = :descricao"),
     @NamedQuery(name = "Tarefas.findByRecompensa", query = "SELECT t FROM Tarefas t WHERE t.recompensa = :recompensa"),
+    @NamedQuery(name = "Tarefas.findByDificuldade", query = "SELECT t FROM Tarefas t WHERE t.dificuldade = :dificuldade"),
     @NamedQuery(name = "Tarefas.findByConcluido", query = "SELECT t FROM Tarefas t WHERE t.concluido = :concluido")})
 public class Tarefas implements Serializable {
 
@@ -42,6 +43,9 @@ public class Tarefas implements Serializable {
     private String descricao;
     @Column(name = "recompensa")
     private Integer recompensa;
+    @Basic(optional = false)
+    @Column(name = "dificuldade")
+    private String dificuldade;
     @Column(name = "concluido")
     private Boolean concluido;
     @JoinColumn(name = "usuario_id", referencedColumnName = "id_usuario")
@@ -55,9 +59,10 @@ public class Tarefas implements Serializable {
         this.idTarefas = idTarefas;
     }
 
-    public Tarefas(Integer idTarefas, String descricao) {
+    public Tarefas(Integer idTarefas, String descricao, String dificuldade) {
         this.idTarefas = idTarefas;
         this.descricao = descricao;
+        this.dificuldade = dificuldade;
     }
 
     public Integer getIdTarefas() {
@@ -82,6 +87,14 @@ public class Tarefas implements Serializable {
 
     public void setRecompensa(Integer recompensa) {
         this.recompensa = recompensa;
+    }
+
+    public String getDificuldade() {
+        return dificuldade;
+    }
+
+    public void setDificuldade(String dificuldade) {
+        this.dificuldade = dificuldade;
     }
 
     public Boolean getConcluido() {

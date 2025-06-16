@@ -18,13 +18,13 @@ import javax.persistence.EntityManagerFactory;
 
 /**
  *
- * @author ifsp
+ * @author Kayky Henrique
  */
 public class TarefasJpaController implements Serializable {
-
+    
     public TarefasJpaController(EntityManagerFactory emf) {
         this.emf = emf;
-    }
+}
     private EntityManagerFactory emf = null;
 
     public EntityManager getEntityManager() {
