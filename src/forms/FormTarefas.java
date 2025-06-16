@@ -28,20 +28,22 @@ public class FormTarefas extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jProgressBar1 = new javax.swing.JProgressBar();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        tblTarefas = new javax.swing.JTable();
+        btnFinalizarTarefa = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        mniTarefas = new javax.swing.JMenuItem();
+        mniGerenciarTarefas = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenu3 = new javax.swing.JMenu();
         jMenu4 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblTarefas.setFont(new java.awt.Font("Mongolian Baiti", 1, 14)); // NOI18N
+        tblTarefas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -59,18 +61,21 @@ public class FormTarefas extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jTable1.setToolTipText("");
-        jScrollPane1.setViewportView(jTable1);
+        tblTarefas.setToolTipText("");
+        jScrollPane1.setViewportView(tblTarefas);
 
-        jButton1.setText("jButton1");
+        btnFinalizarTarefa.setFont(new java.awt.Font("Mongolian Baiti", 1, 24)); // NOI18N
+        btnFinalizarTarefa.setText("Concluir Tarefa");
+
+        jMenuBar1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jMenu1.setText("Tarefas");
 
-        jMenuItem2.setText("Tarefas");
-        jMenu1.add(jMenuItem2);
+        mniTarefas.setText("Tarefas");
+        jMenu1.add(mniTarefas);
 
-        jMenuItem1.setText("Gerenciar Tarefas");
-        jMenu1.add(jMenuItem1);
+        mniGerenciarTarefas.setText("Gerenciar Tarefas");
+        jMenu1.add(mniGerenciarTarefas);
 
         jMenuBar1.add(jMenu1);
 
@@ -92,18 +97,18 @@ public class FormTarefas extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 547, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 547, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnFinalizarTarefa))
                 .addContainerGap(20, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 349, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 352, Short.MAX_VALUE)
                 .addGap(30, 30, 30)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20))
+                .addComponent(btnFinalizarTarefa)
+                .addGap(28, 28, 28))
         );
 
         pack();
@@ -135,15 +140,16 @@ public class FormTarefas extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnFinalizarTarefa;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JMenuItem mniGerenciarTarefas;
+    private javax.swing.JMenuItem mniTarefas;
+    private javax.swing.JTable tblTarefas;
     // End of variables declaration//GEN-END:variables
 }

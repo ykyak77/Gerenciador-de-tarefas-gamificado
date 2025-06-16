@@ -29,48 +29,90 @@ public class FormGerenciarTarefas extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblTarefas = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
+        txtTitulo = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
+        btnAlterar = new javax.swing.JButton();
+        btnExcluir = new javax.swing.JButton();
+        btnCriar = new javax.swing.JButton();
+        txtId = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        cmbDificuldade = new javax.swing.JComboBox<>();
+        jButton4 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
+        mniTarefas = new javax.swing.JMenuItem();
+        mniGerenciarTarefas = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
+        jMenu3 = new javax.swing.JMenu();
+        jMenu4 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jTable1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblTarefas.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        tblTarefas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Title 1", "Title 2", "Title 3"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tblTarefas);
 
         jLabel1.setFont(new java.awt.Font("Mongolian Baiti", 1, 24)); // NOI18N
         jLabel1.setText("Titulo:");
 
-        jTextField1.setEditable(false);
-        jTextField1.setText("jTextField1");
-
-        jLabel2.setFont(new java.awt.Font("Mongolian Baiti", 1, 24)); // NOI18N
-        jLabel2.setText("Recompensa:");
+        txtTitulo.setFont(new java.awt.Font("Mongolian Baiti", 1, 18)); // NOI18N
 
         jLabel3.setFont(new java.awt.Font("Mongolian Baiti", 1, 24)); // NOI18N
         jLabel3.setText("Dificuldade:");
 
-        jMenu1.setText("File");
+        btnAlterar.setFont(new java.awt.Font("Mongolian Baiti", 1, 24)); // NOI18N
+        btnAlterar.setText("Alterar");
+
+        btnExcluir.setFont(new java.awt.Font("Mongolian Baiti", 1, 24)); // NOI18N
+        btnExcluir.setText("Excluir");
+
+        btnCriar.setFont(new java.awt.Font("Mongolian Baiti", 1, 24)); // NOI18N
+        btnCriar.setText("Criar");
+
+        txtId.setEditable(false);
+        txtId.setFont(new java.awt.Font("Mongolian Baiti", 1, 14)); // NOI18N
+
+        jLabel2.setFont(new java.awt.Font("Mongolian Baiti", 1, 24)); // NOI18N
+        jLabel2.setText("ID:");
+
+        cmbDificuldade.setFont(new java.awt.Font("Mongolian Baiti", 1, 18)); // NOI18N
+        cmbDificuldade.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mediocre", "Baixa", "Média", "Alta", "Extrema", "Infernal" }));
+
+        jButton4.setFont(new java.awt.Font("Mongolian Baiti", 1, 18)); // NOI18N
+        jButton4.setText("Pesquisar");
+
+        jMenuBar1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        jMenu1.setText("Tarefas");
+
+        mniTarefas.setText("Tarefas");
+        jMenu1.add(mniTarefas);
+
+        mniGerenciarTarefas.setText("Gerenciar Tarefas");
+        jMenu1.add(mniGerenciarTarefas);
+
         jMenuBar1.add(jMenu1);
 
-        jMenu2.setText("Edit");
+        jMenu2.setText("Loja");
         jMenuBar1.add(jMenu2);
+
+        jMenu3.setText("Inventario");
+        jMenuBar1.add(jMenu3);
+
+        jMenu4.setText("Perfil");
+        jMenuBar1.add(jMenu4);
 
         setJMenuBar(jMenuBar1);
 
@@ -80,29 +122,56 @@ public class FormGerenciarTarefas extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(40, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(40, 40, 40)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 334, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 565, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel3))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtTitulo))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(cmbDificuldade, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButton4))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(73, 73, 73)
+                        .addComponent(btnAlterar)
+                        .addGap(58, 58, 58)
+                        .addComponent(btnExcluir)
+                        .addGap(53, 53, 53)
+                        .addComponent(btnCriar)))
                 .addGap(40, 40, 40))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(26, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1)
+                    .addComponent(txtTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(cmbDificuldade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton4))
+                .addGap(26, 26, 26)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(42, 42, 42)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(29, 29, 29)
-                .addComponent(jLabel3)
-                .addGap(32, 32, 32)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnAlterar)
+                    .addComponent(btnExcluir)
+                    .addComponent(btnCriar))
+                .addGap(32, 32, 32))
         );
 
         pack();
@@ -134,14 +203,24 @@ public class FormGerenciarTarefas extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAlterar;
+    private javax.swing.JButton btnCriar;
+    private javax.swing.JButton btnExcluir;
+    private javax.swing.JComboBox<String> cmbDificuldade;
+    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JMenuItem mniGerenciarTarefas;
+    private javax.swing.JMenuItem mniTarefas;
+    private javax.swing.JTable tblTarefas;
+    private javax.swing.JTextField txtId;
+    private javax.swing.JTextField txtTitulo;
     // End of variables declaration//GEN-END:variables
 }

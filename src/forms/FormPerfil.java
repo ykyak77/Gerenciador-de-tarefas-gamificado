@@ -28,17 +28,136 @@ public class FormPerfil extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        txtFoco = new javax.swing.JTextField();
+        txtAgilidade = new javax.swing.JTextField();
+        txtInteligencia = new javax.swing.JTextField();
+        txtEnergia = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        btnSubir_Foco = new javax.swing.JButton();
+        btnSubir_Energia = new javax.swing.JButton();
+        btnSubir_Inteligencia = new javax.swing.JButton();
+        btnSubir_Agilidade = new javax.swing.JButton();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        mniTarefas = new javax.swing.JMenuItem();
+        mniGerenciarTarefas = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
+        jMenu3 = new javax.swing.JMenu();
+        jMenu4 = new javax.swing.JMenu();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        txtFoco.setFont(new java.awt.Font("Mongolian Baiti", 1, 18)); // NOI18N
+        txtFoco.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+
+        txtAgilidade.setFont(new java.awt.Font("Mongolian Baiti", 1, 18)); // NOI18N
+        txtAgilidade.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+
+        txtInteligencia.setFont(new java.awt.Font("Mongolian Baiti", 1, 18)); // NOI18N
+        txtInteligencia.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+
+        txtEnergia.setFont(new java.awt.Font("Mongolian Baiti", 1, 18)); // NOI18N
+        txtEnergia.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+
+        jLabel1.setFont(new java.awt.Font("Mongolian Baiti", 1, 24)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Foco:");
+
+        jLabel2.setFont(new java.awt.Font("Mongolian Baiti", 1, 24)); // NOI18N
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText("Agilidade:");
+
+        jLabel3.setFont(new java.awt.Font("Mongolian Baiti", 1, 24)); // NOI18N
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setText("Inteligência:");
+
+        jLabel4.setFont(new java.awt.Font("Mongolian Baiti", 1, 24)); // NOI18N
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel4.setText("Energia:");
+
+        btnSubir_Foco.setText("+");
+
+        btnSubir_Energia.setText("+");
+
+        btnSubir_Inteligencia.setText("+");
+
+        btnSubir_Agilidade.setText("+");
+
+        jMenuBar1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        jMenu1.setText("Tarefas");
+
+        mniTarefas.setText("Tarefas");
+        jMenu1.add(mniTarefas);
+
+        mniGerenciarTarefas.setText("Gerenciar Tarefas");
+        jMenu1.add(mniGerenciarTarefas);
+
+        jMenuBar1.add(jMenu1);
+
+        jMenu2.setText("Loja");
+        jMenuBar1.add(jMenu2);
+
+        jMenu3.setText("Inventario");
+        jMenuBar1.add(jMenu3);
+
+        jMenu4.setText("Perfil");
+        jMenuBar1.add(jMenu4);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 668, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(152, 152, 152)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(33, 33, 33)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(txtInteligencia, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtAgilidade, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtFoco, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtEnergia, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(30, 30, 30)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnSubir_Foco)
+                    .addComponent(btnSubir_Agilidade)
+                    .addComponent(btnSubir_Inteligencia)
+                    .addComponent(btnSubir_Energia))
+                .addContainerGap(160, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 539, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(34, 34, 34)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtFoco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1)
+                    .addComponent(btnSubir_Foco))
+                .addGap(43, 43, 43)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtAgilidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2)
+                    .addComponent(btnSubir_Agilidade))
+                .addGap(44, 44, 44)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtInteligencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3)
+                    .addComponent(btnSubir_Inteligencia))
+                .addGap(44, 44, 44)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtEnergia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4)
+                    .addComponent(btnSubir_Energia))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
 
         pack();
@@ -70,5 +189,24 @@ public class FormPerfil extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnSubir_Agilidade;
+    private javax.swing.JButton btnSubir_Energia;
+    private javax.swing.JButton btnSubir_Foco;
+    private javax.swing.JButton btnSubir_Inteligencia;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem mniGerenciarTarefas;
+    private javax.swing.JMenuItem mniTarefas;
+    private javax.swing.JTextField txtAgilidade;
+    private javax.swing.JTextField txtEnergia;
+    private javax.swing.JTextField txtFoco;
+    private javax.swing.JTextField txtInteligencia;
     // End of variables declaration//GEN-END:variables
 }
