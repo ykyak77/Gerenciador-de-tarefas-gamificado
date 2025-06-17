@@ -40,12 +40,15 @@ public class FormMenu extends javax.swing.JFrame {
 
         BtnLoginMenu.setBackground(new java.awt.Color(204, 204, 204));
         BtnLoginMenu.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
-        BtnLoginMenu.setForeground(new java.awt.Color(0, 0, 0));
         BtnLoginMenu.setText("Login");
+        BtnLoginMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnLoginMenuActionPerformed(evt);
+            }
+        });
 
         BtnCadastrarMenu.setBackground(new java.awt.Color(204, 204, 204));
         BtnCadastrarMenu.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
-        BtnCadastrarMenu.setForeground(new java.awt.Color(0, 0, 0));
         BtnCadastrarMenu.setText("Cadastrar");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -79,6 +82,10 @@ public class FormMenu extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void BtnLoginMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnLoginMenuActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BtnLoginMenuActionPerformed
 
     /**
      * @param args the command line arguments

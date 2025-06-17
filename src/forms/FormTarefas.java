@@ -4,21 +4,53 @@
  */
 package forms;
 
-/**
- *
- * @author José Ângelo
- */
+import beans.Tarefas;
+import beans.Usuarios;
+import dao.TarefasJpaController;
+import emf.Emf;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 public class FormTarefas extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FormTarefas.class.getName());
 
-    /**
-     * Creates new form FormTarefas
-     */
+    private Usuarios usr;
+    private TarefasJpaController tarefaDAO; 
+    
+    
     public FormTarefas() {
+        initComponents();   
+        preenchertabela();
+    }
+    
+    public FormTarefas(Usuarios usr) {
         initComponents();
+        this.usr = usr;
+        this.tarefaDAO = new TarefasJpaController(Emf.getEmf());
     }
 
+        private void preenchertabela(){
+        DefaultTableModel tabela = (DefaultTableModel) tblTarefas.getModel();
+        tabela.setNumRows(0);
+        
+        try {
+            List<Tarefas> lista = this.tarefaDAO.ExibeTarefasAFazer(usr.getIdUsuario());
+            
+            for(Tarefas t : lista){
+                Object[] nvLinha = new Object[]{
+                    t.getDescricao(),
+                    t.getDificuldade(),
+                    t.getRecompensa()
+                };
+                tabela.addRow(nvLinha);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.getMessage());
+        }
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -54,7 +86,7 @@ public class FormTarefas extends javax.swing.JFrame {
                 {null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3"
+                "Tarefa", "Dificuldade", "Recompensa"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -70,15 +102,30 @@ public class FormTarefas extends javax.swing.JFrame {
 
         btnFinalizarTarefa.setFont(new java.awt.Font("Mongolian Baiti", 1, 24)); // NOI18N
         btnFinalizarTarefa.setText("Concluir Tarefa");
+        btnFinalizarTarefa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFinalizarTarefaActionPerformed(evt);
+            }
+        });
 
         jMenuBar1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jMenu1.setText("Tarefas");
 
         mniTarefas.setText("Tarefas");
+        mniTarefas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniTarefasActionPerformed(evt);
+            }
+        });
         jMenu1.add(mniTarefas);
 
         mniGerenciarTarefas.setText("Gerenciar Tarefas");
+        mniGerenciarTarefas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniGerenciarTarefasActionPerformed(evt);
+            }
+        });
         jMenu1.add(mniGerenciarTarefas);
 
         jMenuBar1.add(jMenu1);
@@ -120,15 +167,29 @@ public class FormTarefas extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(20, 20, 20)
+                .addGap(32, 32, 32)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 352, Short.MAX_VALUE)
-                .addGap(30, 30, 30)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnFinalizarTarefa)
-                .addGap(28, 28, 28))
+                .addGap(34, 34, 34))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void mniTarefasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniTarefasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_mniTarefasActionPerformed
+
+    private void btnFinalizarTarefaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFinalizarTarefaActionPerformed
+        System.out.println(usr);
+    }//GEN-LAST:event_btnFinalizarTarefaActionPerformed
+
+    private void mniGerenciarTarefasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniGerenciarTarefasActionPerformed
+        FormGerenciarTarefas gerenciar = new FormGerenciarTarefas(usr);
+        gerenciar.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_mniGerenciarTarefasActionPerformed
 
     /**
      * @param args the command line arguments

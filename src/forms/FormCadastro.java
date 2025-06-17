@@ -4,11 +4,13 @@
  */
 package forms;
 
+import beans.Personagens;
 import beans.Usuarios;
 import javax.swing.JOptionPane;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import dao.UsuariosJpaController;
+import dao.PersonagensJpaController;
 import emf.Emf;
 /**
  *
@@ -17,6 +19,8 @@ import emf.Emf;
 public class FormCadastro extends javax.swing.JFrame {
     
     private UsuariosJpaController usuarioDAO;
+    private PersonagensJpaController personagemDAO;
+
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FormCadastro.class.getName());
 
@@ -27,6 +31,8 @@ public class FormCadastro extends javax.swing.JFrame {
         initComponents();
         
         this.usuarioDAO = new UsuariosJpaController(Emf.getEmf());
+        this.personagemDAO = new PersonagensJpaController(Emf.getEmf());
+
     }
 
 
@@ -177,16 +183,27 @@ public class FormCadastro extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCadastrarActionPerformed
+        if (TxtNomeCadastro.getText().trim().isEmpty() || 
+            txtUsername.getText().trim().isEmpty() || 
+            TxtEmailCadastro.getText().trim().isEmpty() || 
+            TxtSenhaCadastro.getText().trim().isEmpty() || 
+            TxtComfirmarSenhaCadastro.getText().trim().isEmpty()) {
+
+            JOptionPane.showMessageDialog(this, "Por favor, preencha todos os campos!", "Aviso", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        
         if (!TxtComfirmarSenhaCadastro.getText().equals(TxtSenhaCadastro.getText())){
-            JOptionPane.showMessageDialog(this, "As senha precisam ser iguais!!");
+            JOptionPane.showMessageDialog(this, "As senha precisam ser iguais!!", "Aviso", JOptionPane.WARNING_MESSAGE);
             return;
         }
         if (usuarioDAO.emailExiste(TxtEmailCadastro.getText())){
-            JOptionPane.showMessageDialog(this, "Email ja cadastrado");
+            JOptionPane.showMessageDialog(this, "Email ja cadastrado", "Aviso", JOptionPane.WARNING_MESSAGE);
             return;
         }
         if (usuarioDAO.usernameExiste(txtUsername.getText())) {
-            JOptionPane.showMessageDialog(this, "Usuario ja existente");
+            JOptionPane.showMessageDialog(this, "Usuario ja existente", "Aviso", JOptionPane.WARNING_MESSAGE);
             return;
         }
         
@@ -199,14 +216,19 @@ public class FormCadastro extends javax.swing.JFrame {
         
         u.setSenha(senhaHash);
         
-
-        
         try {
             usuarioDAO.create(u);
-            JOptionPane.showMessageDialog(this, "FOIIIIIII");
+            
+            Personagens p = new Personagens();
+            p.setUsuarioId(u);
+            personagemDAO.create(p);
+            
+            FormTarefas tarefas = new FormTarefas(u);
+            tarefas.setVisible(true);
+            this.dispose();
 
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, e.getMessage());
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Aviso", JOptionPane.WARNING_MESSAGE);
 
         }       
 

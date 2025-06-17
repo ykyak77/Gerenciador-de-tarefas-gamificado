@@ -4,10 +4,12 @@
  */
 package forms;
 
-/**
- *
- * @author José Ângelo
- */
+import javax.swing.JOptionPane;
+import beans.Usuarios;
+import javax.persistence.EntityManager;
+import emf.Emf;
+import javax.persistence.NoResultException;
+
 public class FormLogin extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FormLogin.class.getName());
@@ -19,6 +21,18 @@ public class FormLogin extends javax.swing.JFrame {
         initComponents();
     }
 
+    public Usuarios buscarPorEmail(String email) {
+        EntityManager em = null;
+        try {
+            em = emf.Emf.getEmf().createEntityManager();
+            return em.createQuery("SELECT u FROM Usuarios u WHERE u.email = :email", Usuarios.class)
+                    .setParameter("email", email)
+                    .getSingleResult();
+        } catch (NoResultException e) {
+            return null;
+        }
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -32,9 +46,9 @@ public class FormLogin extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         TxtEmailLogin = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        TxtSenhaLogin = new javax.swing.JTextField();
         BtnLogarLogin = new javax.swing.JButton();
         BtnCriarConta = new javax.swing.JButton();
+        TxtSenhaLogin = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -49,17 +63,23 @@ public class FormLogin extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Segoe Print", 3, 18)); // NOI18N
         jLabel4.setText("E-mail:");
 
-        TxtSenhaLogin.setFont(new java.awt.Font("Segoe Script", 3, 12)); // NOI18N
-
         BtnLogarLogin.setBackground(new java.awt.Color(204, 204, 204));
         BtnLogarLogin.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
-        BtnLogarLogin.setForeground(new java.awt.Color(0, 0, 0));
         BtnLogarLogin.setText("Logar");
+        BtnLogarLogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnLogarLoginActionPerformed(evt);
+            }
+        });
 
         BtnCriarConta.setBackground(new java.awt.Color(204, 255, 204));
         BtnCriarConta.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
-        BtnCriarConta.setForeground(new java.awt.Color(0, 0, 0));
         BtnCriarConta.setText("Criar conta");
+        BtnCriarConta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnCriarContaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -81,9 +101,8 @@ public class FormLogin extends javax.swing.JFrame {
                                 .addComponent(BtnLogarLogin)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(BtnCriarConta))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(TxtEmailLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(TxtSenhaLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(TxtEmailLogin, javax.swing.GroupLayout.DEFAULT_SIZE, 369, Short.MAX_VALUE)
+                            .addComponent(TxtSenhaLogin))
                         .addGap(41, 41, 41))))
         );
         layout.setVerticalGroup(
@@ -98,17 +117,44 @@ public class FormLogin extends javax.swing.JFrame {
                 .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(TxtSenhaLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(TxtSenhaLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BtnLogarLogin)
                     .addComponent(BtnCriarConta))
-                .addContainerGap(60, Short.MAX_VALUE))
+                .addContainerGap(58, Short.MAX_VALUE))
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void BtnLogarLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnLogarLoginActionPerformed
+        String email = TxtEmailLogin.getText();
+        char[] senhaChar = TxtSenhaLogin.getPassword();
+        String senha = new String(senhaChar);
+
+        Usuarios usuario = buscarPorEmail(email);
+
+        if (usuario == null) {
+            JOptionPane.showMessageDialog(this, "Usuário não encontrado.");
+            return;
+        }
+
+        if (usuario.getSenha().equals(senha)) {           
+            FormTarefas tarefas = new FormTarefas(usuario);
+            tarefas.setVisible(true);
+            this.dispose();
+            
+        } else {
+            JOptionPane.showMessageDialog(this, "Senha incorreta.");
+        }
+    }//GEN-LAST:event_BtnLogarLoginActionPerformed
+
+    private void BtnCriarContaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCriarContaActionPerformed
+        new FormCadastro().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_BtnCriarContaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -139,7 +185,7 @@ public class FormLogin extends javax.swing.JFrame {
     private javax.swing.JButton BtnCriarConta;
     private javax.swing.JButton BtnLogarLogin;
     private javax.swing.JTextField TxtEmailLogin;
-    private javax.swing.JTextField TxtSenhaLogin;
+    private javax.swing.JPasswordField TxtSenhaLogin;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

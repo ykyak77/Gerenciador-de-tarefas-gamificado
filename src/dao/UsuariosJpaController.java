@@ -40,10 +40,10 @@ public class UsuariosJpaController implements Serializable {
         EntityManager em = getEntityManager();
         try {
             String jpql = "SELECT COUNT(u) FROM Usuarios u WHERE u.email = :email";
-            Long count = em.createQuery(jpql, Long.class)
+            Long resposta = em.createQuery(jpql, Long.class)
                            .setParameter("email", email)
                            .getSingleResult();
-            return count > 0;
+            return resposta > 0;
         } finally {
             em.close();
         }
@@ -53,10 +53,10 @@ public class UsuariosJpaController implements Serializable {
         EntityManager em = getEntityManager();
         try {
             String jpql = "SELECT COUNT(u) FROM Usuarios u WHERE u.username = :username";
-            Long count = em.createQuery(jpql, Long.class)
+            Long resposta = em.createQuery(jpql, Long.class)
                            .setParameter("username", username)
                            .getSingleResult();
-            return count > 0;
+            return resposta > 0;
         } finally {
             em.close();
         }

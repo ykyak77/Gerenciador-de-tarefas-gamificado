@@ -15,6 +15,7 @@ import dao.exceptions.NonexistentEntityException;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -146,6 +147,34 @@ public class TarefasJpaController implements Serializable {
         EntityManager em = getEntityManager();
         try {
             return em.find(Tarefas.class, id);
+        } finally {
+            em.close();
+        }
+    }
+    
+    public List<Tarefas> ExibeTarefasByUsuario(int idUsuario) {
+        EntityManager em = getEntityManager();
+        try {
+            TypedQuery<Tarefas> q = em.createQuery(
+                "SELECT t FROM Tarefas t WHERE t.usuarioId.idUsuario = :idUsuario",
+                Tarefas.class
+            );
+            q.setParameter("idUsuario", idUsuario);
+            return q.getResultList();
+        } finally {
+            em.close();
+        }
+    }
+    
+    public List<Tarefas> ExibeTarefasAFazer(int idUsuario) {
+        EntityManager em = getEntityManager();
+        try {
+            TypedQuery<Tarefas> q = em.createQuery(
+                "SELECT t FROM Tarefas t WHERE t.usuarioId.idUsuario = :idUsuario and t.concluido = false",
+                Tarefas.class
+            );
+            q.setParameter("idUsuario", idUsuario);
+            return q.getResultList();
         } finally {
             em.close();
         }
