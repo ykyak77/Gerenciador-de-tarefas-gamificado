@@ -35,6 +35,33 @@ public class UsuariosJpaController implements Serializable {
     public EntityManager getEntityManager() {
         return emf.createEntityManager();
     }
+    
+    public boolean emailExiste(String email) {
+        EntityManager em = getEntityManager();
+        try {
+            String jpql = "SELECT COUNT(u) FROM Usuarios u WHERE u.email = :email";
+            Long count = em.createQuery(jpql, Long.class)
+                           .setParameter("email", email)
+                           .getSingleResult();
+            return count > 0;
+        } finally {
+            em.close();
+        }
+    }
+
+    public boolean usernameExiste(String username) {
+        EntityManager em = getEntityManager();
+        try {
+            String jpql = "SELECT COUNT(u) FROM Usuarios u WHERE u.username = :username";
+            Long count = em.createQuery(jpql, Long.class)
+                           .setParameter("username", username)
+                           .getSingleResult();
+            return count > 0;
+        } finally {
+            em.close();
+        }
+    }
+
 
     public void create(Usuarios usuarios) {
         if (usuarios.getTarefasCollection() == null) {
