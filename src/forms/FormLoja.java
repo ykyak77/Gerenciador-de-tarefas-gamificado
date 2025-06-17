@@ -28,17 +28,91 @@ public class FormLoja extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblLoja = new javax.swing.JTable();
+        btnComprar = new javax.swing.JButton();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        mniTarefas = new javax.swing.JMenuItem();
+        mniGerenciarTarefas = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
+        mniLoja = new javax.swing.JMenuItem();
+        jMenu3 = new javax.swing.JMenu();
+        mniInventario = new javax.swing.JMenuItem();
+        jMenu4 = new javax.swing.JMenu();
+        mniPerfil = new javax.swing.JMenuItem();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        tblLoja.setFont(new java.awt.Font("Mongolian Baiti", 1, 18)); // NOI18N
+        tblLoja.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3"
+            }
+        ));
+        jScrollPane1.setViewportView(tblLoja);
+
+        btnComprar.setFont(new java.awt.Font("Mongolian Baiti", 1, 24)); // NOI18N
+        btnComprar.setText("Comprar");
+
+        jMenuBar1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        jMenu1.setText("Tarefas");
+
+        mniTarefas.setText("Tarefas");
+        jMenu1.add(mniTarefas);
+
+        mniGerenciarTarefas.setText("Gerenciar Tarefas");
+        jMenu1.add(mniGerenciarTarefas);
+
+        jMenuBar1.add(jMenu1);
+
+        jMenu2.setText("Loja");
+
+        mniLoja.setText("Loja");
+        jMenu2.add(mniLoja);
+
+        jMenuBar1.add(jMenu2);
+
+        jMenu3.setText("Inventario");
+
+        mniInventario.setText("Inventario");
+        jMenu3.add(mniInventario);
+
+        jMenuBar1.add(jMenu3);
+
+        jMenu4.setText("Perfil");
+
+        mniPerfil.setText("Perfil");
+        jMenu4.add(mniPerfil);
+
+        jMenuBar1.add(jMenu4);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(btnComprar)
+                .addContainerGap(20, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 466, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(204, 204, 204)
+                .addComponent(btnComprar)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -70,5 +144,18 @@ public class FormLoja extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnComprar;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JMenuItem mniGerenciarTarefas;
+    private javax.swing.JMenuItem mniInventario;
+    private javax.swing.JMenuItem mniLoja;
+    private javax.swing.JMenuItem mniPerfil;
+    private javax.swing.JMenuItem mniTarefas;
+    private javax.swing.JTable tblLoja;
     // End of variables declaration//GEN-END:variables
 }

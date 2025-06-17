@@ -45,10 +45,14 @@ public class FormPerfil extends javax.swing.JFrame {
         mniTarefas = new javax.swing.JMenuItem();
         mniGerenciarTarefas = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
+        mniLoja = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
+        mniInventario = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
+        mniPerfil = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Perfil");
 
         txtFoco.setFont(new java.awt.Font("Mongolian Baiti", 1, 18)); // NOI18N
         txtFoco.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -99,12 +103,24 @@ public class FormPerfil extends javax.swing.JFrame {
         jMenuBar1.add(jMenu1);
 
         jMenu2.setText("Loja");
+
+        mniLoja.setText("Loja");
+        jMenu2.add(mniLoja);
+
         jMenuBar1.add(jMenu2);
 
         jMenu3.setText("Inventario");
+
+        mniInventario.setText("Inventario");
+        jMenu3.add(mniInventario);
+
         jMenuBar1.add(jMenu3);
 
         jMenu4.setText("Perfil");
+
+        mniPerfil.setText("Perfil");
+        jMenu4.add(mniPerfil);
+
         jMenuBar1.add(jMenu4);
 
         setJMenuBar(jMenuBar1);
@@ -114,7 +130,7 @@ public class FormPerfil extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(152, 152, 152)
+                .addGap(80, 80, 80)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -132,7 +148,7 @@ public class FormPerfil extends javax.swing.JFrame {
                     .addComponent(btnSubir_Agilidade)
                     .addComponent(btnSubir_Inteligencia)
                     .addComponent(btnSubir_Energia))
-                .addContainerGap(160, Short.MAX_VALUE))
+                .addContainerGap(80, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -203,6 +219,9 @@ public class FormPerfil extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem mniGerenciarTarefas;
+    private javax.swing.JMenuItem mniInventario;
+    private javax.swing.JMenuItem mniLoja;
+    private javax.swing.JMenuItem mniPerfil;
     private javax.swing.JMenuItem mniTarefas;
     private javax.swing.JTextField txtAgilidade;
     private javax.swing.JTextField txtEnergia;

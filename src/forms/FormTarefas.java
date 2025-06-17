@@ -37,10 +37,14 @@ public class FormTarefas extends javax.swing.JFrame {
         mniTarefas = new javax.swing.JMenuItem();
         mniGerenciarTarefas = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
+        mniLoja = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
+        mniInventario = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
+        mniPerfil = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Tarefas");
 
         tblTarefas.setFont(new java.awt.Font("Mongolian Baiti", 1, 14)); // NOI18N
         tblTarefas.setModel(new javax.swing.table.DefaultTableModel(
@@ -80,12 +84,24 @@ public class FormTarefas extends javax.swing.JFrame {
         jMenuBar1.add(jMenu1);
 
         jMenu2.setText("Loja");
+
+        mniLoja.setText("Loja");
+        jMenu2.add(mniLoja);
+
         jMenuBar1.add(jMenu2);
 
         jMenu3.setText("Inventario");
+
+        mniInventario.setText("Inventario");
+        jMenu3.add(mniInventario);
+
         jMenuBar1.add(jMenu3);
 
         jMenu4.setText("Perfil");
+
+        mniPerfil.setText("Perfil");
+        jMenu4.add(mniPerfil);
+
         jMenuBar1.add(jMenu4);
 
         setJMenuBar(jMenuBar1);
@@ -149,6 +165,9 @@ public class FormTarefas extends javax.swing.JFrame {
     private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JMenuItem mniGerenciarTarefas;
+    private javax.swing.JMenuItem mniInventario;
+    private javax.swing.JMenuItem mniLoja;
+    private javax.swing.JMenuItem mniPerfil;
     private javax.swing.JMenuItem mniTarefas;
     private javax.swing.JTable tblTarefas;
     // End of variables declaration//GEN-END:variables
