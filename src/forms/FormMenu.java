@@ -29,18 +29,24 @@ public class FormMenu extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        BtnLoginMenu = new javax.swing.JButton();
+        BtnCadastrarMenu = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("The Last of Task");
 
-        jLabel1.setFont(new java.awt.Font("Mongolian Baiti", 1, 48)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Segoe Print", 3, 52)); // NOI18N
         jLabel1.setText("The last of Task");
 
-        jButton1.setText("jButton1");
+        BtnLoginMenu.setBackground(new java.awt.Color(204, 204, 204));
+        BtnLoginMenu.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
+        BtnLoginMenu.setForeground(new java.awt.Color(0, 0, 0));
+        BtnLoginMenu.setText("Login");
 
-        jButton2.setText("jButton1");
+        BtnCadastrarMenu.setBackground(new java.awt.Color(204, 204, 204));
+        BtnCadastrarMenu.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
+        BtnCadastrarMenu.setForeground(new java.awt.Color(0, 0, 0));
+        BtnCadastrarMenu.setText("Cadastrar");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -49,28 +55,29 @@ public class FormMenu extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(162, 162, 162)
+                        .addGap(113, 113, 113)
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(291, 291, 291)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton2)
-                            .addComponent(jButton1))))
-                .addContainerGap(168, Short.MAX_VALUE))
+                        .addGap(146, 146, 146)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(BtnCadastrarMenu)
+                            .addComponent(BtnLoginMenu))))
+                .addContainerGap(132, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(64, 64, 64)
+                .addGap(16, 16, 16)
                 .addComponent(jLabel1)
-                .addGap(117, 117, 117)
-                .addComponent(jButton1)
-                .addGap(49, 49, 49)
-                .addComponent(jButton2)
-                .addContainerGap(91, Short.MAX_VALUE))
+                .addGap(28, 28, 28)
+                .addComponent(BtnLoginMenu)
+                .addGap(27, 27, 27)
+                .addComponent(BtnCadastrarMenu)
+                .addContainerGap(196, Short.MAX_VALUE))
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     /**
@@ -99,8 +106,8 @@ public class FormMenu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton BtnCadastrarMenu;
+    private javax.swing.JButton BtnLoginMenu;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }
