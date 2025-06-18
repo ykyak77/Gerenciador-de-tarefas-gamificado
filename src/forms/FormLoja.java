@@ -4,19 +4,59 @@
  */
 package forms;
 
-/**
- *
- * @author José Ângelo
- */
+import beans.Usuarios;
+import dao.UsuariosJpaController;
+import emf.Emf;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
+
 public class FormLoja extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FormLoja.class.getName());
+
+    private Usuarios usr;
+    private UsuariosJpaController usuarioDAO;
 
     /**
      * Creates new form FormLoja
      */
     public FormLoja() {
         initComponents();
+    }
+    
+    public FormLoja(Usuarios usr) {
+        initComponents();
+        
+        this.usr = usr; 
+        this.usuarioDAO = new UsuariosJpaController(Emf.getEmf());
+        
+        preenchertabela();
+    }
+    
+    private void preenchertabela(){
+        lblMoeda.setText(String.valueOf(usr.getMoedas()));
+
+
+//        DefaultTableModel tabela = (DefaultTableModel) tblTarefas.getModel();
+//        tabela.setNumRows(0);
+//
+//        try {
+//            List<Tarefas> lista = this.tarefaDAO.ExibeTarefasAFazer(usr.getIdUsuario());
+//
+//            for(Tarefas t : lista){
+//                Object[] nvLinha = new Object[]{
+//                    t.getIdTarefas(),
+//                    t.getDescricao(),
+//                    t.getDificuldade(),
+//                    t.getRecompensa()
+//                };
+//                tabela.addRow(nvLinha);
+//            }
+//        } catch (Exception e) {
+//            JOptionPane.showMessageDialog(this, e.getMessage());
+//        }
     }
 
     /**
@@ -30,17 +70,10 @@ public class FormLoja extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         tblLoja = new javax.swing.JTable();
+        btnVoltar = new javax.swing.JButton();
         btnComprar = new javax.swing.JButton();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        mniTarefas = new javax.swing.JMenuItem();
-        mniGerenciarTarefas = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
-        mniLoja = new javax.swing.JMenuItem();
-        jMenu3 = new javax.swing.JMenu();
-        mniInventario = new javax.swing.JMenuItem();
-        jMenu4 = new javax.swing.JMenu();
-        mniPerfil = new javax.swing.JMenuItem();
+        jLabel2 = new javax.swing.JLabel();
+        lblMoeda = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -58,65 +91,71 @@ public class FormLoja extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tblLoja);
 
+        btnVoltar.setFont(new java.awt.Font("Mongolian Baiti", 0, 18)); // NOI18N
+        btnVoltar.setText("VOLTAR");
+        btnVoltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVoltarActionPerformed(evt);
+            }
+        });
+
         btnComprar.setFont(new java.awt.Font("Mongolian Baiti", 1, 24)); // NOI18N
         btnComprar.setText("Comprar");
 
-        jMenuBar1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel2.setText("TOTAL DE MOEDAS:");
 
-        jMenu1.setText("Tarefas");
-
-        mniTarefas.setText("Tarefas");
-        jMenu1.add(mniTarefas);
-
-        mniGerenciarTarefas.setText("Gerenciar Tarefas");
-        jMenu1.add(mniGerenciarTarefas);
-
-        jMenuBar1.add(jMenu1);
-
-        jMenu2.setText("Loja");
-
-        mniLoja.setText("Loja");
-        jMenu2.add(mniLoja);
-
-        jMenuBar1.add(jMenu2);
-
-        jMenu3.setText("Inventario");
-
-        mniInventario.setText("Inventario");
-        jMenu3.add(mniInventario);
-
-        jMenuBar1.add(jMenu3);
-
-        jMenu4.setText("Perfil");
-
-        mniPerfil.setText("Perfil");
-        jMenu4.add(mniPerfil);
-
-        jMenuBar1.add(jMenu4);
-
-        setJMenuBar(jMenuBar1);
+        lblMoeda.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblMoeda.setText("moeda");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20)
-                .addComponent(btnComprar)
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 547, Short.MAX_VALUE)
+                .addGap(31, 31, 31)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnComprar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnVoltar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(39, 39, 39))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblMoeda, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 466, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGap(204, 204, 204)
-                .addComponent(btnComprar)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(11, 11, 11)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(lblMoeda))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 453, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(189, 189, 189)
+                        .addComponent(btnComprar, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
+        Usuarios user = usuarioDAO.findUsuarios(usr.getIdUsuario());
+        
+        FormTarefas tarefas = new FormTarefas(user);
+        tarefas.setVisible(true);
+        this.dispose(); 
+    }//GEN-LAST:event_btnVoltarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -145,17 +184,10 @@ public class FormLoja extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnComprar;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenu jMenu4;
-    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JButton btnVoltar;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JMenuItem mniGerenciarTarefas;
-    private javax.swing.JMenuItem mniInventario;
-    private javax.swing.JMenuItem mniLoja;
-    private javax.swing.JMenuItem mniPerfil;
-    private javax.swing.JMenuItem mniTarefas;
+    private javax.swing.JLabel lblMoeda;
     private javax.swing.JTable tblLoja;
     // End of variables declaration//GEN-END:variables
 }

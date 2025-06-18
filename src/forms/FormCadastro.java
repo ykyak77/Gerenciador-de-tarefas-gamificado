@@ -68,12 +68,12 @@ public class FormCadastro extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         TxtNomeCadastro = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        TxtComfirmarSenhaCadastro = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        TxtSenhaCadastro = new javax.swing.JTextField();
         BtnCadastrar = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         txtUsername = new javax.swing.JTextField();
+        txtConfirmaSenha = new javax.swing.JPasswordField();
+        txtSenha = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -93,12 +93,8 @@ public class FormCadastro extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Segoe Print", 3, 18)); // NOI18N
         jLabel4.setText("Comfirmar senha:");
 
-        TxtComfirmarSenhaCadastro.setFont(new java.awt.Font("Segoe Script", 3, 12)); // NOI18N
-
         jLabel5.setFont(new java.awt.Font("Segoe Print", 3, 18)); // NOI18N
         jLabel5.setText("Senha:");
-
-        TxtSenhaCadastro.setFont(new java.awt.Font("Segoe Script", 3, 12)); // NOI18N
 
         BtnCadastrar.setBackground(new java.awt.Color(204, 255, 204));
         BtnCadastrar.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
@@ -119,34 +115,45 @@ public class FormCadastro extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addGap(0, 266, Short.MAX_VALUE)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(230, 230, 230))
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel6)
-                        .addGap(22, 22, 22)
-                        .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(22, 22, 22)
-                        .addComponent(TxtNomeCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(BtnCadastrar)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(70, 70, 70)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(BtnCadastrar)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(91, 91, 91)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel5)))
-                            .addComponent(jLabel4))
-                        .addGap(22, 22, 22)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                            .addComponent(jLabel3)
+                                            .addGap(18, 18, 18))
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(jLabel6)
+                                            .addGap(14, 14, 14)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel2)
+                                        .addGap(14, 14, 14)))
+                                .addGap(4, 4, 4)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtUsername, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 373, Short.MAX_VALUE)
+                                    .addComponent(TxtEmailCadastro)
+                                    .addComponent(TxtNomeCadastro)))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel5)
+                                .addGap(26, 26, 26))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(TxtComfirmarSenhaCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(TxtEmailCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(TxtSenhaCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(130, Short.MAX_VALUE))
+                            .addComponent(txtSenha)
+                            .addComponent(txtConfirmaSenha))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -165,17 +172,17 @@ public class FormCadastro extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(TxtEmailCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(TxtSenhaCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4)
-                    .addComponent(TxtComfirmarSenhaCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(22, 22, 22)
+                    .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtConfirmaSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
+                .addGap(38, 38, 38)
                 .addComponent(BtnCadastrar)
-                .addContainerGap(37, Short.MAX_VALUE))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
 
         pack();
@@ -183,18 +190,21 @@ public class FormCadastro extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCadastrarActionPerformed
+        String senha = new String(txtSenha.getPassword());
+        String confirmaSenha = new String(txtConfirmaSenha.getPassword());
+        
         if (TxtNomeCadastro.getText().trim().isEmpty() || 
             txtUsername.getText().trim().isEmpty() || 
             TxtEmailCadastro.getText().trim().isEmpty() || 
-            TxtSenhaCadastro.getText().trim().isEmpty() || 
-            TxtComfirmarSenhaCadastro.getText().trim().isEmpty()) {
+            senha.trim().isEmpty() || 
+            confirmaSenha.trim().isEmpty()) {
 
             JOptionPane.showMessageDialog(this, "Por favor, preencha todos os campos!", "Aviso", JOptionPane.WARNING_MESSAGE);
             return;
         }
 
         
-        if (!TxtComfirmarSenhaCadastro.getText().equals(TxtSenhaCadastro.getText())){
+        if (!confirmaSenha.equals(senha)){
             JOptionPane.showMessageDialog(this, "As senha precisam ser iguais!!", "Aviso", JOptionPane.WARNING_MESSAGE);
             return;
         }
@@ -212,7 +222,7 @@ public class FormCadastro extends javax.swing.JFrame {
         u.setUsername(txtUsername.getText());
         u.setEmail(TxtEmailCadastro.getText());
         
-        String senhaHash = gerarHashSHA256(TxtSenhaCadastro.getText());
+        String senhaHash = gerarHashSHA256(senha);
         
         u.setSenha(senhaHash);
         
@@ -261,16 +271,16 @@ public class FormCadastro extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnCadastrar;
-    private javax.swing.JTextField TxtComfirmarSenhaCadastro;
     private javax.swing.JTextField TxtEmailCadastro;
     private javax.swing.JTextField TxtNomeCadastro;
-    private javax.swing.JTextField TxtSenhaCadastro;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JPasswordField txtConfirmaSenha;
+    private javax.swing.JPasswordField txtSenha;
     private javax.swing.JTextField txtUsername;
     // End of variables declaration//GEN-END:variables
 }

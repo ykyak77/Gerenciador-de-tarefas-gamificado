@@ -152,6 +152,19 @@ public class TarefasJpaController implements Serializable {
         }
     }
     
+    public int getTarefasCount() {
+        EntityManager em = getEntityManager();
+        try {
+            CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
+            Root<Tarefas> rt = cq.from(Tarefas.class);
+            cq.select(em.getCriteriaBuilder().count(rt));
+            Query q = em.createQuery(cq);
+            return ((Long) q.getSingleResult()).intValue();
+        } finally {
+            em.close();
+        }
+    }
+    
     public List<Tarefas> ExibeTarefasByUsuario(int idUsuario) {
         EntityManager em = getEntityManager();
         try {
@@ -179,18 +192,9 @@ public class TarefasJpaController implements Serializable {
             em.close();
         }
     }
+    
 
-    public int getTarefasCount() {
-        EntityManager em = getEntityManager();
-        try {
-            CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            Root<Tarefas> rt = cq.from(Tarefas.class);
-            cq.select(em.getCriteriaBuilder().count(rt));
-            Query q = em.createQuery(cq);
-            return ((Long) q.getSingleResult()).intValue();
-        } finally {
-            em.close();
-        }
-    }
+
+
     
 }

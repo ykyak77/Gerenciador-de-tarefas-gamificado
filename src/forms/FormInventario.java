@@ -4,10 +4,9 @@
  */
 package forms;
 
-/**
- *
- * @author José Ângelo
- */
+import beans.Usuarios;
+
+
 public class FormInventario extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FormInventario.class.getName());
@@ -16,6 +15,10 @@ public class FormInventario extends javax.swing.JFrame {
      * Creates new form FormInventario
      */
     public FormInventario() {
+        initComponents();
+    }
+    
+    public FormInventario(Usuarios usr) {
         initComponents();
     }
 
@@ -69,8 +72,8 @@ public class FormInventario extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 105, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 341, Short.MAX_VALUE)
                 .addContainerGap())
         );
 

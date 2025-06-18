@@ -4,6 +4,8 @@
  */
 package forms;
 
+import beans.Usuarios;
+
 /**
  *
  * @author José Ângelo
@@ -16,6 +18,10 @@ public class FormPerfil extends javax.swing.JFrame {
      * Creates new form FormPerfil
      */
     public FormPerfil() {
+        initComponents();
+    }
+    
+    public FormPerfil(Usuarios usr) {
         initComponents();
     }
 

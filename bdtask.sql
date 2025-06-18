@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 16/06/2025 às 03:01
+-- Tempo de geração: 18/06/2025 às 17:13
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.2.12
 
@@ -28,9 +28,10 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `inventario` (
-  `id_invetario` int(11) NOT NULL,
+  `id` int(11) NOT NULL,
   `usuario_id` int(11) NOT NULL,
-  `item_id` int(11) NOT NULL
+  `item_id` int(11) NOT NULL,
+  `quantidade` int(11) DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -40,8 +41,8 @@ CREATE TABLE `inventario` (
 --
 
 CREATE TABLE `itens_loja` (
-  `id_loja` int(11) NOT NULL,
-  `nome` varchar(50) NOT NULL,
+  `id_item` int(11) NOT NULL,
+  `nome` varchar(100) NOT NULL,
   `descricao` text DEFAULT NULL,
   `preco` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -53,7 +54,7 @@ CREATE TABLE `itens_loja` (
 --
 
 CREATE TABLE `personagens` (
-  `id_personagem` int(11) NOT NULL,
+  `id` int(11) NOT NULL,
   `usuario_id` int(11) NOT NULL,
   `foco` int(11) DEFAULT 0,
   `agilidade` int(11) DEFAULT 0,
@@ -73,16 +74,9 @@ CREATE TABLE `tarefas` (
   `usuario_id` int(11) NOT NULL,
   `descricao` varchar(150) NOT NULL,
   `recompensa` int(11) DEFAULT 20,
-  `dificuldade` enum('FACIL','MEDIO','DIFICIL') NOT NULL,
-  `concluido` tinyint(1) DEFAULT 0
+  `concluido` tinyint(1) DEFAULT 0,
+  `dificuldade` enum('FACIL','MEDIO','DIFICIL') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Despejando dados para a tabela `tarefas`
---
-
-INSERT INTO `tarefas` (`id_tarefas`, `usuario_id`, `descricao`, `recompensa`, `dificuldade`, `concluido`) VALUES
-(1, 1, 'Arrumar a cama', 25, 'FACIL', 1);
 
 -- --------------------------------------------------------
 
@@ -95,17 +89,8 @@ CREATE TABLE `usuarios` (
   `nome` varchar(50) NOT NULL,
   `username` varchar(50) NOT NULL,
   `email` varchar(150) NOT NULL,
-  `senha` varchar(150) NOT NULL,
-  `moedas` int(11) DEFAULT 0
+  `senha` varchar(150) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Despejando dados para a tabela `usuarios`
---
-
-INSERT INTO `usuarios` (`id_usuario`, `nome`, `username`, `email`, `senha`, `moedas`) VALUES
-(1, 'Maria', 'Mah', 'mariazinha009@gmail.com', '1234', 0),
-(2, 'Josias', 'jojo', 'josias1233@gmail.com', '1234', 0);
 
 --
 -- Índices para tabelas despejadas
@@ -115,7 +100,7 @@ INSERT INTO `usuarios` (`id_usuario`, `nome`, `username`, `email`, `senha`, `moe
 -- Índices de tabela `inventario`
 --
 ALTER TABLE `inventario`
-  ADD PRIMARY KEY (`id_invetario`),
+  ADD PRIMARY KEY (`id`),
   ADD KEY `usuario_id` (`usuario_id`),
   ADD KEY `item_id` (`item_id`);
 
@@ -123,13 +108,13 @@ ALTER TABLE `inventario`
 -- Índices de tabela `itens_loja`
 --
 ALTER TABLE `itens_loja`
-  ADD PRIMARY KEY (`id_loja`);
+  ADD PRIMARY KEY (`id_item`);
 
 --
 -- Índices de tabela `personagens`
 --
 ALTER TABLE `personagens`
-  ADD PRIMARY KEY (`id_personagem`),
+  ADD PRIMARY KEY (`id`),
   ADD KEY `usuario_id` (`usuario_id`);
 
 --
@@ -155,31 +140,31 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de tabela `inventario`
 --
 ALTER TABLE `inventario`
-  MODIFY `id_invetario` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de tabela `itens_loja`
 --
 ALTER TABLE `itens_loja`
-  MODIFY `id_loja` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_item` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de tabela `personagens`
 --
 ALTER TABLE `personagens`
-  MODIFY `id_personagem` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de tabela `tarefas`
 --
 ALTER TABLE `tarefas`
-  MODIFY `id_tarefas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_tarefas` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de tabela `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Restrições para tabelas despejadas
@@ -189,20 +174,20 @@ ALTER TABLE `usuarios`
 -- Restrições para tabelas `inventario`
 --
 ALTER TABLE `inventario`
-  ADD CONSTRAINT `inventario_ibfk_1` FOREIGN KEY (`usuario_id`) REFERENCES `usuarios` (`id_usuario`),
-  ADD CONSTRAINT `inventario_ibfk_2` FOREIGN KEY (`item_id`) REFERENCES `itens_loja` (`id_loja`);
+  ADD CONSTRAINT `inventario_ibfk_1` FOREIGN KEY (`usuario_id`) REFERENCES `usuarios` (`id_usuario`) ON DELETE CASCADE,
+  ADD CONSTRAINT `inventario_ibfk_2` FOREIGN KEY (`item_id`) REFERENCES `itens_loja` (`id_item`) ON DELETE CASCADE;
 
 --
 -- Restrições para tabelas `personagens`
 --
 ALTER TABLE `personagens`
-  ADD CONSTRAINT `personagens_ibfk_1` FOREIGN KEY (`usuario_id`) REFERENCES `usuarios` (`id_usuario`);
+  ADD CONSTRAINT `personagens_ibfk_1` FOREIGN KEY (`usuario_id`) REFERENCES `usuarios` (`id_usuario`) ON DELETE CASCADE;
 
 --
 -- Restrições para tabelas `tarefas`
 --
 ALTER TABLE `tarefas`
-  ADD CONSTRAINT `tarefas_ibfk_1` FOREIGN KEY (`usuario_id`) REFERENCES `usuarios` (`id_usuario`);
+  ADD CONSTRAINT `tarefas_ibfk_1` FOREIGN KEY (`usuario_id`) REFERENCES `usuarios` (`id_usuario`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

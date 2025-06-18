@@ -7,6 +7,7 @@ package forms;
 import beans.Tarefas;
 import beans.Usuarios;
 import dao.TarefasJpaController;
+import dao.UsuariosJpaController;
 import emf.Emf;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -18,20 +19,26 @@ public class FormTarefas extends javax.swing.JFrame {
 
     private Usuarios usr;
     private TarefasJpaController tarefaDAO; 
+    private UsuariosJpaController userDAO;
     
     
     public FormTarefas() {
-        initComponents();   
-        preenchertabela();
+        initComponents();
     }
     
     public FormTarefas(Usuarios usr) {
         initComponents();
+        
         this.usr = usr;
         this.tarefaDAO = new TarefasJpaController(Emf.getEmf());
+        this.userDAO = new UsuariosJpaController(Emf.getEmf());
+        
+        preenchertabela();
     }
 
         private void preenchertabela(){
+        lblMoeda.setText(String.valueOf(usr.getMoedas()));
+        
         DefaultTableModel tabela = (DefaultTableModel) tblTarefas.getModel();
         tabela.setNumRows(0);
         
@@ -40,6 +47,7 @@ public class FormTarefas extends javax.swing.JFrame {
             
             for(Tarefas t : lista){
                 Object[] nvLinha = new Object[]{
+                    t.getIdTarefas(),
                     t.getDescricao(),
                     t.getDificuldade(),
                     t.getRecompensa()
@@ -64,6 +72,8 @@ public class FormTarefas extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblTarefas = new javax.swing.JTable();
         btnFinalizarTarefa = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        lblMoeda = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         mniTarefas = new javax.swing.JMenuItem();
@@ -81,16 +91,16 @@ public class FormTarefas extends javax.swing.JFrame {
         tblTarefas.setFont(new java.awt.Font("Mongolian Baiti", 1, 14)); // NOI18N
         tblTarefas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Tarefa", "Dificuldade", "Recompensa"
+                "ID", "Tarefa", "Dificuldade", "Recompensa"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -107,6 +117,11 @@ public class FormTarefas extends javax.swing.JFrame {
                 btnFinalizarTarefaActionPerformed(evt);
             }
         });
+
+        jLabel1.setText("TOTAL DE MOEDAS:");
+
+        lblMoeda.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblMoeda.setText("\"Moedas\"");
 
         jMenuBar1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
@@ -133,6 +148,11 @@ public class FormTarefas extends javax.swing.JFrame {
         jMenu2.setText("Loja");
 
         mniLoja.setText("Loja");
+        mniLoja.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniLojaActionPerformed(evt);
+            }
+        });
         jMenu2.add(mniLoja);
 
         jMenuBar1.add(jMenu2);
@@ -140,6 +160,11 @@ public class FormTarefas extends javax.swing.JFrame {
         jMenu3.setText("Inventario");
 
         mniInventario.setText("Inventario");
+        mniInventario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniInventarioActionPerformed(evt);
+            }
+        });
         jMenu3.add(mniInventario);
 
         jMenuBar1.add(jMenu3);
@@ -147,6 +172,11 @@ public class FormTarefas extends javax.swing.JFrame {
         jMenu4.setText("Perfil");
 
         mniPerfil.setText("Perfil");
+        mniPerfil.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniPerfilActionPerformed(evt);
+            }
+        });
         jMenu4.add(mniPerfil);
 
         jMenuBar1.add(jMenu4);
@@ -160,6 +190,11 @@ public class FormTarefas extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblMoeda)
+                        .addGap(25, 25, 25))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 547, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnFinalizarTarefa))
                 .addContainerGap(20, Short.MAX_VALUE))
@@ -167,7 +202,11 @@ public class FormTarefas extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(32, 32, 32)
+                .addGap(10, 10, 10)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(lblMoeda))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 352, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnFinalizarTarefa)
@@ -175,6 +214,7 @@ public class FormTarefas extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void mniTarefasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniTarefasActionPerformed
@@ -182,7 +222,33 @@ public class FormTarefas extends javax.swing.JFrame {
     }//GEN-LAST:event_mniTarefasActionPerformed
 
     private void btnFinalizarTarefaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFinalizarTarefaActionPerformed
-        System.out.println(usr);
+        int linhaSelecionada = tblTarefas.getSelectedRow();
+        
+        if(linhaSelecionada == -1){
+            JOptionPane.showMessageDialog(this, "Selecione uma linha da tabela", "Aviso", JOptionPane.WARNING_MESSAGE);
+        }
+        else{
+            String idTarefa = tblTarefas.getValueAt(linhaSelecionada,0).toString();
+            int id = Integer.parseInt(idTarefa);
+            
+            try {
+                Tarefas tarefa = tarefaDAO.findTarefas(id);
+                                
+                //concluir tarefa(marcar como true)
+                tarefa.setUsuarioId(usr);
+                tarefa.setConcluido(true);
+                tarefaDAO.edit(tarefa);
+                //somar moedas
+                int total = usr.getMoedas() + tarefa.getRecompensa();
+                usr.setMoedas(total);
+                userDAO.edit(usr);
+                
+                JOptionPane.showMessageDialog(this, tarefa.getDescricao() + " realizada com sucesso hoje");
+                preenchertabela();
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, e.getMessage(), "Aviso", JOptionPane.WARNING_MESSAGE);
+            }
+        }
     }//GEN-LAST:event_btnFinalizarTarefaActionPerformed
 
     private void mniGerenciarTarefasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniGerenciarTarefasActionPerformed
@@ -190,6 +256,24 @@ public class FormTarefas extends javax.swing.JFrame {
         gerenciar.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_mniGerenciarTarefasActionPerformed
+
+    private void mniLojaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniLojaActionPerformed
+        FormLoja loja = new FormLoja(usr);
+        loja.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_mniLojaActionPerformed
+
+    private void mniInventarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniInventarioActionPerformed
+        FormInventario inventario = new FormInventario(usr);
+        inventario.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_mniInventarioActionPerformed
+
+    private void mniPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniPerfilActionPerformed
+        FormPerfil perfil = new FormPerfil(usr);
+        perfil.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_mniPerfilActionPerformed
 
     /**
      * @param args the command line arguments
@@ -218,6 +302,7 @@ public class FormTarefas extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnFinalizarTarefa;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
@@ -225,6 +310,7 @@ public class FormTarefas extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblMoeda;
     private javax.swing.JMenuItem mniGerenciarTarefas;
     private javax.swing.JMenuItem mniInventario;
     private javax.swing.JMenuItem mniLoja;
