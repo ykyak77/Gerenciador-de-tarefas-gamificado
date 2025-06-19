@@ -5,6 +5,10 @@
 package forms;
 
 import beans.Usuarios;
+import beans.Inventario;
+import beans.ItensLoja;
+import dao.InventarioJpaController;
+import dao.ItensLojaJpaController;
 import dao.UsuariosJpaController;
 import emf.Emf;
 import java.util.List;
@@ -18,6 +22,8 @@ public class FormLoja extends javax.swing.JFrame {
 
     private Usuarios usr;
     private UsuariosJpaController usuarioDAO;
+    private ItensLojaJpaController lojaDAO;
+    private InventarioJpaController inventarioDAO;
 
     /**
      * Creates new form FormLoja
@@ -30,33 +36,47 @@ public class FormLoja extends javax.swing.JFrame {
         initComponents();
         
         this.usr = usr; 
-        this.usuarioDAO = new UsuariosJpaController(Emf.getEmf());
+        this.usuarioDAO = new UsuariosJpaController(Emf.getEmf()); 
         
+        this.usuarioDAO = new UsuariosJpaController(Emf.getEmf());
+        this.lojaDAO = new ItensLojaJpaController(Emf.getEmf());
+        this.inventarioDAO = new InventarioJpaController(Emf.getEmf());
+
         preenchertabela();
     }
     
-    private void preenchertabela(){
-        lblMoeda.setText(String.valueOf(usr.getMoedas()));
+    private void preenchertabela() {
+        try {
+            var em = Emf.getEmf().createEntityManager();
 
+            String jpql = "SELECT i FROM ItensLoja i WHERE i.idLoja NOT IN "
+                    + "(SELECT inv.itemId.idLoja FROM Inventario inv WHERE inv.usuarioId.idUsuario = :usuarioId)";
 
-//        DefaultTableModel tabela = (DefaultTableModel) tblTarefas.getModel();
-//        tabela.setNumRows(0);
-//
-//        try {
-//            List<Tarefas> lista = this.tarefaDAO.ExibeTarefasAFazer(usr.getIdUsuario());
-//
-//            for(Tarefas t : lista){
-//                Object[] nvLinha = new Object[]{
-//                    t.getIdTarefas(),
-//                    t.getDescricao(),
-//                    t.getDificuldade(),
-//                    t.getRecompensa()
-//                };
-//                tabela.addRow(nvLinha);
-//            }
-//        } catch (Exception e) {
-//            JOptionPane.showMessageDialog(this, e.getMessage());
-//        }
+            List<beans.ItensLoja> itensDisponiveis = em.createQuery(jpql, beans.ItensLoja.class)
+                    .setParameter("usuarioId", usr.getIdUsuario())
+                    .getResultList();
+
+            DefaultTableModel tabela = new DefaultTableModel();
+            tabela.setColumnIdentifiers(new String[]{"ID", "Nome", "Descrição", "Preço"});
+
+            for (beans.ItensLoja item : itensDisponiveis) {
+                tabela.addRow(new Object[]{
+                    item.getIdLoja(),
+                    item.getNome(),
+                    item.getDescricao(),
+                    item.getPreco()
+                });
+            }
+            tblLoja.setModel(tabela);
+            lblMoeda.setText(String.valueOf(usr.getMoedas()));
+
+            em.close();
+
+        } catch (Exception e) {
+            logger.severe("Erro ao preencher tabela: " + e.getMessage());
+            JOptionPane.showMessageDialog(this, "Erro ao carregar itens da loja.");
+        }
+
     }
 
     /**
@@ -80,15 +100,20 @@ public class FormLoja extends javax.swing.JFrame {
         tblLoja.setFont(new java.awt.Font("Mongolian Baiti", 1, 18)); // NOI18N
         tblLoja.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3"
+                "ID", "NOME", "DESCROÇÃO", "PREÇO"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(tblLoja);
 
         btnVoltar.setFont(new java.awt.Font("Mongolian Baiti", 0, 18)); // NOI18N
@@ -101,6 +126,11 @@ public class FormLoja extends javax.swing.JFrame {
 
         btnComprar.setFont(new java.awt.Font("Mongolian Baiti", 1, 24)); // NOI18N
         btnComprar.setText("Comprar");
+        btnComprar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnComprarActionPerformed(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel2.setText("TOTAL DE MOEDAS:");
@@ -156,6 +186,45 @@ public class FormLoja extends javax.swing.JFrame {
         tarefas.setVisible(true);
         this.dispose(); 
     }//GEN-LAST:event_btnVoltarActionPerformed
+
+    private void btnComprarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnComprarActionPerformed
+        int linha = tblLoja.getSelectedRow();
+        
+        if (linha == -1) {
+            JOptionPane.showMessageDialog(null, "Selecione um item para comprar.");
+            return;
+        }
+
+        int preco = Integer.parseInt(tblLoja.getValueAt(linha, 3).toString());
+        int idItem = Integer.parseInt(tblLoja.getValueAt(linha, 0).toString());
+
+        if (usr.getMoedas() < preco) {
+            JOptionPane.showMessageDialog(null, "Você não tem moedas suficientes, faça suas tarefas!");
+            return;
+        }
+
+        try {
+            ItensLoja item = lojaDAO.findItensLoja(idItem);
+
+            usr = usuarioDAO.findUsuarios(usr.getIdUsuario());
+            usr.setMoedas(usr.getMoedas() - preco);
+            usuarioDAO.edit(usr);
+            
+            Inventario i = new Inventario();
+            
+            i.setItemId(item);
+            i.setUsuarioId(usr);
+         
+
+            inventarioDAO.create(i);
+
+            JOptionPane.showMessageDialog(null, "Item comprado com sucesso!");
+            preenchertabela();
+        } catch (Exception e) {
+            logger.severe("Erro na compra: " + e.getMessage());
+            JOptionPane.showMessageDialog(null, "Erro ao realizar a compra");
+        }
+    }//GEN-LAST:event_btnComprarActionPerformed
 
     /**
      * @param args the command line arguments

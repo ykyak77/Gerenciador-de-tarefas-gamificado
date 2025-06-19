@@ -7,6 +7,7 @@
     <class>beans.Tarefas</class>
     <class>beans.Personagens</class>
     <class>beans.Usuarios</class>
+    <class>beans.ControleReset</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/bdtask?setTimezone=UTC&amp;useSSL=false"/>
       <property name="javax.persistence.jdbc.user" value="root"/>

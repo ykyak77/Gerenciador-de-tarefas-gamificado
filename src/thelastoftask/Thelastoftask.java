@@ -4,14 +4,10 @@
  */
 package thelastoftask;
 
-
 import forms.FormLogin;
 
 public class Thelastoftask {
-
-    /**
-     * @param args the command line arguments
-     */
+  
     public static void main(String[] args) {
         FormLogin login = new FormLogin();
         login.setVisible(true);

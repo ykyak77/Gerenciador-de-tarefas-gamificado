@@ -5,12 +5,22 @@
 package forms;
 
 import beans.Usuarios;
+import dao.UsuariosJpaController;
+import emf.Emf;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 
 public class FormInventario extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FormInventario.class.getName());
 
+    private Usuarios usr;
+    private UsuariosJpaController usuarioDAO;
+
+
+    
     /**
      * Creates new form FormInventario
      */
@@ -20,6 +30,48 @@ public class FormInventario extends javax.swing.JFrame {
     
     public FormInventario(Usuarios usr) {
         initComponents();
+        
+        this.usr = usr;
+        this.usuarioDAO = new UsuariosJpaController(Emf.getEmf());
+        
+        preenchertabela();
+    }
+    
+    private void preenchertabela() {
+       try {
+        var em = Emf.getEmf().createEntityManager();
+
+        // Consulta o inventário pelo usuário
+        String jpql = "SELECT inv FROM Inventario inv WHERE inv.usuarioId.idUsuario = :usuarioId";
+
+        // Retorna a lista de registros do inventário
+        List<beans.Inventario> itensInventario = em.createQuery(jpql, beans.Inventario.class)
+                .setParameter("usuarioId", usr.getIdUsuario())
+                .getResultList();
+
+        // Cria a tabela com colunas de itens
+        DefaultTableModel tabela = new DefaultTableModel();
+        tabela.setColumnIdentifiers(new String[]{"Nome", "Descrição", "Preço"});
+
+        for (beans.Inventario inv : itensInventario) {
+            beans.ItensLoja item = inv.getItemId(); // relação entre Inventario → ItensLoja
+
+            tabela.addRow(new Object[]{
+                item.getNome(),
+                item.getDescricao(),
+                item.getPreco()
+            });
+        }
+
+        Tblinventario.setModel(tabela);
+
+        em.close();
+
+    } catch (Exception e) {
+        logger.severe("Erro ao preencher tabela: " + e.getMessage());
+        JOptionPane.showMessageDialog(this, "Erro ao carregar itens do inventário.");
+    }
+
     }
 
     /**
@@ -34,16 +86,14 @@ public class FormInventario extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         Tblinventario = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
+        btnVoltar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         Tblinventario.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
         Tblinventario.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+
             },
             new String [] {
                 "Nome", "Descrição", "Preço"
@@ -54,24 +104,32 @@ public class FormInventario extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Segoe Print", 3, 48)); // NOI18N
         jLabel1.setText("Inventário");
 
+        btnVoltar.setText("VOLTAR");
+        btnVoltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVoltarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1)
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(227, Short.MAX_VALUE)
+                .addComponent(btnVoltar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 148, Short.MAX_VALUE)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(225, 225, 225))
+            .addComponent(jScrollPane1)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnVoltar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 341, Short.MAX_VALUE)
                 .addContainerGap())
@@ -80,6 +138,14 @@ public class FormInventario extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
+        Usuarios user = usuarioDAO.findUsuarios(usr.getIdUsuario());
+        
+        FormTarefas tarefas = new FormTarefas(user);
+        tarefas.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnVoltarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -108,6 +174,7 @@ public class FormInventario extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable Tblinventario;
+    private javax.swing.JButton btnVoltar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables

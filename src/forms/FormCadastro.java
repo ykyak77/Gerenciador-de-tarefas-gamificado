@@ -221,6 +221,7 @@ public class FormCadastro extends javax.swing.JFrame {
         u.setNome(TxtNomeCadastro.getText());
         u.setUsername(txtUsername.getText());
         u.setEmail(TxtEmailCadastro.getText());
+        
         u.setMoedas(1000);
         
         String senhaHash = gerarHashSHA256(senha);

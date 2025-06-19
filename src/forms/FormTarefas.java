@@ -6,6 +6,7 @@ package forms;
 
 import beans.Tarefas;
 import beans.Usuarios;
+import dao.ControleResetJpaController;
 import dao.TarefasJpaController;
 import dao.UsuariosJpaController;
 import emf.Emf;
@@ -20,7 +21,7 @@ public class FormTarefas extends javax.swing.JFrame {
     private Usuarios usr;
     private TarefasJpaController tarefaDAO; 
     private UsuariosJpaController userDAO;
-    
+    private ControleResetJpaController cr;  
     
     public FormTarefas() {
         initComponents();
@@ -32,6 +33,9 @@ public class FormTarefas extends javax.swing.JFrame {
         this.usr = usr;
         this.tarefaDAO = new TarefasJpaController(Emf.getEmf());
         this.userDAO = new UsuariosJpaController(Emf.getEmf());
+        this.cr = new ControleResetJpaController(Emf.getEmf());
+        
+        cr.ResetarTarefasDiarias();
         
         preenchertabela();
     }
