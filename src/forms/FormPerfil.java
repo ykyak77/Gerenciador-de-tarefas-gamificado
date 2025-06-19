@@ -4,7 +4,12 @@
  */
 package forms;
 
+import beans.Personagens;
 import beans.Usuarios;
+import dao.PersonagensJpaController;
+import dao.UsuariosJpaController;
+import emf.Emf;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -13,6 +18,12 @@ import beans.Usuarios;
 public class FormPerfil extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FormPerfil.class.getName());
+    
+    private Usuarios usr;
+    private UsuariosJpaController userDAO;
+    private PersonagensJpaController personagemDAO;
+    private Personagens p;
+    
 
     /**
      * Creates new form FormPerfil
@@ -23,8 +34,36 @@ public class FormPerfil extends javax.swing.JFrame {
     
     public FormPerfil(Usuarios usr) {
         initComponents();
+        
+        this.usr = usr;
+        this.personagemDAO = new PersonagensJpaController(Emf.getEmf());
+        this.userDAO = new UsuariosJpaController(Emf.getEmf());
+        this.p = personagemDAO.findPersonagens(usr.getIdUsuario());
+        
+        System.out.println(usr.getIdUsuario());
+        
+        setOverall();
+    }
+    
+    public void validarCompra(){
+        if (usr.getMoedas() < p.getPreco()){
+            btnAgilidade.setVisible(false);
+            btnEnergia.setVisible(false);
+            btnFoco.setVisible(false);
+            btnInteligendia.setVisible(false);
+        }
     }
 
+    public void setOverall(){
+        validarCompra();
+        lblMoeda.setText(String.valueOf(usr.getMoedas()));
+        
+        lblFoc.setText(String.valueOf(p.getFoco()));
+        lblAgilidade.setText(String.valueOf(p.getAgilidade()));
+        lblEnergia.setText(String.valueOf(p.getEnergia()));
+        lblInteligencia.setText(String.valueOf(p.getInteligencia()));
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -34,43 +73,81 @@ public class FormPerfil extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        txtFoco = new javax.swing.JTextField();
-        txtAgilidade = new javax.swing.JTextField();
-        txtInteligencia = new javax.swing.JTextField();
-        txtEnergia = new javax.swing.JTextField();
+        btnVoltar = new javax.swing.JButton();
+        lblAgilidade = new javax.swing.JLabel();
+        lblEnergia = new javax.swing.JLabel();
+        lblInteligencia = new javax.swing.JLabel();
+        lblFoc = new javax.swing.JLabel();
+        btnFoco = new javax.swing.JButton();
+        jLabel9 = new javax.swing.JLabel();
+        lblMoeda = new javax.swing.JLabel();
+        btnAgilidade = new javax.swing.JButton();
+        btnInteligendia = new javax.swing.JButton();
+        btnEnergia = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        btnSubir_Foco = new javax.swing.JButton();
-        btnSubir_Energia = new javax.swing.JButton();
-        btnSubir_Inteligencia = new javax.swing.JButton();
-        btnSubir_Agilidade = new javax.swing.JButton();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        mniTarefas = new javax.swing.JMenuItem();
-        mniGerenciarTarefas = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
-        mniLoja = new javax.swing.JMenuItem();
-        jMenu3 = new javax.swing.JMenu();
-        mniInventario = new javax.swing.JMenuItem();
-        jMenu4 = new javax.swing.JMenu();
-        mniPerfil = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Perfil");
 
-        txtFoco.setFont(new java.awt.Font("Mongolian Baiti", 1, 18)); // NOI18N
-        txtFoco.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        btnVoltar.setText("VOLTAR");
+        btnVoltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVoltarActionPerformed(evt);
+            }
+        });
 
-        txtAgilidade.setFont(new java.awt.Font("Mongolian Baiti", 1, 18)); // NOI18N
-        txtAgilidade.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        lblAgilidade.setFont(new java.awt.Font("Mongolian Baiti", 1, 24)); // NOI18N
+        lblAgilidade.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblAgilidade.setText("0");
 
-        txtInteligencia.setFont(new java.awt.Font("Mongolian Baiti", 1, 18)); // NOI18N
-        txtInteligencia.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        lblEnergia.setFont(new java.awt.Font("Mongolian Baiti", 1, 24)); // NOI18N
+        lblEnergia.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblEnergia.setText("0");
 
-        txtEnergia.setFont(new java.awt.Font("Mongolian Baiti", 1, 18)); // NOI18N
-        txtEnergia.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        lblInteligencia.setFont(new java.awt.Font("Mongolian Baiti", 1, 24)); // NOI18N
+        lblInteligencia.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblInteligencia.setText("0");
+
+        lblFoc.setFont(new java.awt.Font("Mongolian Baiti", 1, 24)); // NOI18N
+        lblFoc.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblFoc.setText("0");
+
+        btnFoco.setText("+");
+        btnFoco.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFocoActionPerformed(evt);
+            }
+        });
+
+        jLabel9.setText("TOTAL DE MOEDAS:");
+
+        lblMoeda.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblMoeda.setText("\"Moedas\"");
+
+        btnAgilidade.setText("+");
+        btnAgilidade.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgilidadeActionPerformed(evt);
+            }
+        });
+
+        btnInteligendia.setText("+");
+        btnInteligendia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnInteligendiaActionPerformed(evt);
+            }
+        });
+
+        btnEnergia.setText("+");
+        btnEnergia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEnergiaActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Mongolian Baiti", 1, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -88,102 +165,180 @@ public class FormPerfil extends javax.swing.JFrame {
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("Energia:");
 
-        btnSubir_Foco.setText("+");
-
-        btnSubir_Energia.setText("+");
-
-        btnSubir_Inteligencia.setText("+");
-
-        btnSubir_Agilidade.setText("+");
-
-        jMenuBar1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-
-        jMenu1.setText("Tarefas");
-
-        mniTarefas.setText("Tarefas");
-        jMenu1.add(mniTarefas);
-
-        mniGerenciarTarefas.setText("Gerenciar Tarefas");
-        jMenu1.add(mniGerenciarTarefas);
-
-        jMenuBar1.add(jMenu1);
-
-        jMenu2.setText("Loja");
-
-        mniLoja.setText("Loja");
-        jMenu2.add(mniLoja);
-
-        jMenuBar1.add(jMenu2);
-
-        jMenu3.setText("Inventario");
-
-        mniInventario.setText("Inventario");
-        jMenu3.add(mniInventario);
-
-        jMenuBar1.add(jMenu3);
-
-        jMenu4.setText("Perfil");
-
-        mniPerfil.setText("Perfil");
-        jMenu4.add(mniPerfil);
-
-        jMenuBar1.add(jMenu4);
-
-        setJMenuBar(jMenuBar1);
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addGap(30, 30, 30)
+                .addComponent(jLabel2)
+                .addGap(47, 47, 47)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
+                .addComponent(jLabel4)
+                .addGap(27, 27, 27))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(80, 80, 80)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(33, 33, 33)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(txtInteligencia, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtAgilidade, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtFoco, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtEnergia, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(30, 30, 30)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(btnVoltar))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(62, 62, 62)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnSubir_Foco)
-                    .addComponent(btnSubir_Agilidade)
-                    .addComponent(btnSubir_Inteligencia)
-                    .addComponent(btnSubir_Energia))
-                .addContainerGap(80, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel9)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lblMoeda))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lblInteligencia, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnInteligendia, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lblEnergia, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnEnergia, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lblFoc, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnFoco, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(43, 43, 43))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblAgilidade, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnAgilidade, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(59, 59, 59))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(34, 34, 34)
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtFoco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1)
-                    .addComponent(btnSubir_Foco))
-                .addGap(43, 43, 43)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtAgilidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2)
-                    .addComponent(btnSubir_Agilidade))
-                .addGap(44, 44, 44)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtInteligencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3)
-                    .addComponent(btnSubir_Inteligencia))
-                .addGap(44, 44, 44)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtEnergia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4)
-                    .addComponent(btnSubir_Energia))
-                .addContainerGap(34, Short.MAX_VALUE))
+                    .addComponent(btnVoltar)
+                    .addComponent(jLabel9)
+                    .addComponent(lblMoeda))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnFoco, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblFoc))
+                        .addGap(42, 42, 42)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblAgilidade)
+                            .addComponent(btnAgilidade, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(43, 43, 43)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblInteligencia)
+                            .addComponent(btnInteligendia, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(43, 43, 43)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblEnergia)
+                            .addComponent(btnEnergia, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
+        Usuarios user = userDAO.findUsuarios(usr.getIdUsuario());
+
+        FormTarefas tarefas = new FormTarefas(user);
+        tarefas.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnVoltarActionPerformed
+
+    private void btnFocoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFocoActionPerformed
+        try {
+            int total = p.getFoco()+1;
+            p.setFoco(total);
+            int moeda = usr.getMoedas() - p.getPreco();
+            usr.setMoedas(moeda);
+
+            personagemDAO.edit(p);
+            userDAO.edit(usr);
+            
+            setOverall();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Aviso", JOptionPane.WARNING_MESSAGE);
+
+        }       
+
+    }//GEN-LAST:event_btnFocoActionPerformed
+
+    private void btnAgilidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgilidadeActionPerformed
+        try {
+            int total = p.getAgilidade()+1;
+            p.setAgilidade(total);
+                        int moeda = usr.getMoedas() - p.getPreco();
+            usr.setMoedas(moeda);
+
+            personagemDAO.edit(p);
+            userDAO.edit(usr);
+            
+            setOverall();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Aviso", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_btnAgilidadeActionPerformed
+
+    private void btnInteligendiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInteligendiaActionPerformed
+        try {
+            int total = p.getInteligencia()+1;
+            p.setInteligencia(total);
+            int moeda = usr.getMoedas() - p.getPreco();
+            usr.setMoedas(moeda);
+
+            personagemDAO.edit(p);
+            userDAO.edit(usr);
+            
+            setOverall();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Aviso", JOptionPane.WARNING_MESSAGE);
+
+        }
+    }//GEN-LAST:event_btnInteligendiaActionPerformed
+
+    private void btnEnergiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnergiaActionPerformed
+        try {
+            int total = p.getEnergia()+1;
+            p.setEnergia(total);
+            int moeda = usr.getMoedas() - p.getPreco();
+            usr.setMoedas(moeda);
+
+            personagemDAO.edit(p);
+            userDAO.edit(usr);
+            
+            setOverall();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Aviso", JOptionPane.WARNING_MESSAGE);
+
+        }
+    }//GEN-LAST:event_btnEnergiaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -211,27 +366,21 @@ public class FormPerfil extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnSubir_Agilidade;
-    private javax.swing.JButton btnSubir_Energia;
-    private javax.swing.JButton btnSubir_Foco;
-    private javax.swing.JButton btnSubir_Inteligencia;
+    private javax.swing.JButton btnAgilidade;
+    private javax.swing.JButton btnEnergia;
+    private javax.swing.JButton btnFoco;
+    private javax.swing.JButton btnInteligendia;
+    private javax.swing.JButton btnVoltar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenu jMenu4;
-    private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem mniGerenciarTarefas;
-    private javax.swing.JMenuItem mniInventario;
-    private javax.swing.JMenuItem mniLoja;
-    private javax.swing.JMenuItem mniPerfil;
-    private javax.swing.JMenuItem mniTarefas;
-    private javax.swing.JTextField txtAgilidade;
-    private javax.swing.JTextField txtEnergia;
-    private javax.swing.JTextField txtFoco;
-    private javax.swing.JTextField txtInteligencia;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel lblAgilidade;
+    private javax.swing.JLabel lblEnergia;
+    private javax.swing.JLabel lblFoc;
+    private javax.swing.JLabel lblInteligencia;
+    private javax.swing.JLabel lblMoeda;
     // End of variables declaration//GEN-END:variables
 }
