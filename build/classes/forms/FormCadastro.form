@@ -70,7 +70,8 @@
                           </Group>
                       </Group>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="txtSenha" max="32767" attributes="0"/>
+                          <Component id="BtnCadastrar1" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtSenha" pref="373" max="32767" attributes="0"/>
                           <Component id="txtConfirmaSenha" max="32767" attributes="0"/>
                       </Group>
                   </Group>
@@ -110,7 +111,10 @@
                   <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
-              <Component id="BtnCadastrar" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="BtnCadastrar" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="BtnCadastrar1" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
               <EmptySpace pref="33" max="32767" attributes="0"/>
           </Group>
       </Group>
@@ -203,6 +207,20 @@
     <Component class="javax.swing.JPasswordField" name="txtConfirmaSenha">
     </Component>
     <Component class="javax.swing.JPasswordField" name="txtSenha">
+    </Component>
+    <Component class="javax.swing.JButton" name="BtnCadastrar1">
+      <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="cc" green="ff" red="cc" type="rgb"/>
+        </Property>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Segoe UI" size="18" style="3"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Login"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnCadastrar1ActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

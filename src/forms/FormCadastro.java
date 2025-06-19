@@ -74,6 +74,7 @@ public class FormCadastro extends javax.swing.JFrame {
         txtUsername = new javax.swing.JTextField();
         txtConfirmaSenha = new javax.swing.JPasswordField();
         txtSenha = new javax.swing.JPasswordField();
+        BtnCadastrar1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -110,6 +111,15 @@ public class FormCadastro extends javax.swing.JFrame {
 
         txtUsername.setFont(new java.awt.Font("Segoe Script", 3, 12)); // NOI18N
 
+        BtnCadastrar1.setBackground(new java.awt.Color(204, 255, 204));
+        BtnCadastrar1.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
+        BtnCadastrar1.setText("Login");
+        BtnCadastrar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnCadastrar1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -127,9 +137,7 @@ public class FormCadastro extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                            .addComponent(jLabel3)
-                                            .addGap(18, 18, 18))
+                                        .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
                                         .addGroup(layout.createSequentialGroup()
                                             .addComponent(jLabel6)
                                             .addGap(14, 14, 14)))
@@ -151,7 +159,8 @@ public class FormCadastro extends javax.swing.JFrame {
                                 .addComponent(jLabel4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtSenha)
+                            .addComponent(BtnCadastrar1)
+                            .addComponent(txtSenha, javax.swing.GroupLayout.DEFAULT_SIZE, 373, Short.MAX_VALUE)
                             .addComponent(txtConfirmaSenha))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -181,7 +190,9 @@ public class FormCadastro extends javax.swing.JFrame {
                     .addComponent(txtConfirmaSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
                 .addGap(38, 38, 38)
-                .addComponent(BtnCadastrar)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(BtnCadastrar)
+                    .addComponent(BtnCadastrar1))
                 .addContainerGap(33, Short.MAX_VALUE))
         );
 
@@ -222,7 +233,7 @@ public class FormCadastro extends javax.swing.JFrame {
         u.setUsername(txtUsername.getText());
         u.setEmail(TxtEmailCadastro.getText());
         
-        u.setMoedas(1000);
+//        u.setMoedas(1000);
         
         String senhaHash = gerarHashSHA256(senha);
         
@@ -245,6 +256,12 @@ public class FormCadastro extends javax.swing.JFrame {
         }       
 
     }//GEN-LAST:event_BtnCadastrarActionPerformed
+
+    private void BtnCadastrar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCadastrar1ActionPerformed
+        FormLogin login = new FormLogin();
+        login.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_BtnCadastrar1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -273,6 +290,7 @@ public class FormCadastro extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnCadastrar;
+    private javax.swing.JButton BtnCadastrar1;
     private javax.swing.JTextField TxtEmailCadastro;
     private javax.swing.JTextField TxtNomeCadastro;
     private javax.swing.JLabel jLabel1;
