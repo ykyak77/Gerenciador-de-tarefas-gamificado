@@ -80,7 +80,6 @@ public class FormTarefas extends javax.swing.JFrame {
         lblMoeda = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        mniTarefas = new javax.swing.JMenuItem();
         mniGerenciarTarefas = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         mniLoja = new javax.swing.JMenuItem();
@@ -122,22 +121,15 @@ public class FormTarefas extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setFont(new java.awt.Font("Mongolian Baiti", 1, 24)); // NOI18N
         jLabel1.setText("TOTAL DE MOEDAS:");
 
-        lblMoeda.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblMoeda.setFont(new java.awt.Font("Mongolian Baiti", 1, 24)); // NOI18N
         lblMoeda.setText("\"Moedas\"");
 
         jMenuBar1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jMenu1.setText("Tarefas");
-
-        mniTarefas.setText("Tarefas");
-        mniTarefas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mniTarefasActionPerformed(evt);
-            }
-        });
-        jMenu1.add(mniTarefas);
 
         mniGerenciarTarefas.setText("Gerenciar Tarefas");
         mniGerenciarTarefas.addActionListener(new java.awt.event.ActionListener() {
@@ -191,39 +183,34 @@ public class FormTarefas extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(20, 20, 20)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(21, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblMoeda)
-                        .addGap(25, 25, 25))
+                        .addComponent(lblMoeda))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 547, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnFinalizarTarefa))
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addGap(19, 19, 19))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(10, 10, 10)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(lblMoeda))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 352, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(btnFinalizarTarefa)
-                .addGap(34, 34, 34))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void mniTarefasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniTarefasActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_mniTarefasActionPerformed
 
     private void btnFinalizarTarefaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFinalizarTarefaActionPerformed
         int linhaSelecionada = tblTarefas.getSelectedRow();
@@ -319,7 +306,6 @@ public class FormTarefas extends javax.swing.JFrame {
     private javax.swing.JMenuItem mniInventario;
     private javax.swing.JMenuItem mniLoja;
     private javax.swing.JMenuItem mniPerfil;
-    private javax.swing.JMenuItem mniTarefas;
     private javax.swing.JTable tblTarefas;
     // End of variables declaration//GEN-END:variables
 }
