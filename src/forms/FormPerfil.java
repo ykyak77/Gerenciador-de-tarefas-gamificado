@@ -40,8 +40,6 @@ public class FormPerfil extends javax.swing.JFrame {
         this.userDAO = new UsuariosJpaController(Emf.getEmf());
         this.p = personagemDAO.findPersonagens(usr.getIdUsuario());
         
-        System.out.println(usr.getIdUsuario());
-        
         setOverall();
     }
     
@@ -93,7 +91,7 @@ public class FormPerfil extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Perfil");
 
-        btnVoltar.setFont(new java.awt.Font("Mongolian Baiti", 1, 24)); // NOI18N
+        btnVoltar.setFont(new java.awt.Font("Mongolian Baiti", 1, 14)); // NOI18N
         btnVoltar.setText("VOLTAR");
         btnVoltar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -201,7 +199,7 @@ public class FormPerfil extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(btnVoltar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 117, Short.MAX_VALUE)
                 .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblMoeda)
@@ -256,7 +254,7 @@ public class FormPerfil extends javax.swing.JFrame {
                             .addComponent(lblEnergia)
                             .addComponent(btnEnergia, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(32, Short.MAX_VALUE))
+                .addContainerGap(38, Short.MAX_VALUE))
         );
 
         pack();

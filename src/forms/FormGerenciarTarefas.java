@@ -188,7 +188,7 @@ public class FormGerenciarTarefas extends javax.swing.JFrame {
             }
         });
 
-        btnVoltar.setFont(new java.awt.Font("Mongolian Baiti", 1, 18)); // NOI18N
+        btnVoltar.setFont(new java.awt.Font("Mongolian Baiti", 1, 14)); // NOI18N
         btnVoltar.setText("VOLTAR");
         btnVoltar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
